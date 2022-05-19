@@ -22,4 +22,5 @@ Route.get('/', () => {
 
 Route.group(() =>{
   Route.post('usuarios/registro', 'UserController.store')
+  Route.post('usuarios/login', 'UserController.login')
 }).prefix('api/v1/')
