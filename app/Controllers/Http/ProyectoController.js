@@ -1,5 +1,7 @@
 'use strict'
 
+const AutorizacionService = require("../../Services/AutorizacionService")
+
 const Proyecto = use('App/Models/Proyecto')
 const AurizacionService = use('App/Services/AutorizacionService')
 
@@ -26,6 +28,16 @@ class ProyectoController {
         const project = await Proyecto.find(id)
         AurizacionService.verificarPermiso(project, user)
         await project.delete()
+        return project
+    }
+
+    async update({ auth, params, request }){
+        const user = await auth.getUser()
+        const { id } = params
+        const project = await Proyecto.find(id)
+        AutorizacionService.verificarPermiso(project, user)
+        project.merge(request.only('nombre'))
+        await project.save()
         return project
     }
 }
