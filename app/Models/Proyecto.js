@@ -8,8 +8,8 @@ class Proyecto extends Model {
         return this.belongsTo('App/Models/User')
     }
 
-    tarea () {
-        return this.hasMany('App/Model/Tareas')
+    tareas () {
+        return this.hasMany('App/Models/Tarea')
     }
 }
 
