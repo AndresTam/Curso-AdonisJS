@@ -29,5 +29,6 @@ Route.group(() =>{
   Route.delete('proyectos/:id', 'ProyectoController.destroy').middleware('auth')
   Route.patch('proyectos/:id', 'ProyectoController.update').middleware('auth')
   //Rutas de las tareas
+  Route.get('proyectos/:id/tareas', 'TareaController.index').middleware('auth')
   Route.post('proyectos/:id/tareas', 'TareaController.create').middleware('auth')
 }).prefix('api/v1/')

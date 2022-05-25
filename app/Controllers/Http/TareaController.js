@@ -5,6 +5,14 @@ const Tarea = use('App/Models/Tarea')
 const AutorizacionService = use('App/Services/AutorizacionService')
 
 class TareaController {
+    async index({ auth, request, params }) {
+        const user = await auth.getUser()
+        const { id } = params
+        const proyecto = await Proyecto.find(id)
+        AutorizacionService.verificarPermiso(proyecto, user)
+        return await proyecto.tareas().fetch()
+    }
+
     async create({ auth, request, params }) {
         const user = await auth.getUser()
         const { description } = request.all()
